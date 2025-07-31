@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        #calculadora {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        #pantalla {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 24px;
+            text-align: right;
+            background-color: #f0f0f0;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .boton {
+            width: 60px;
+            height: 40px;
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        .boton:hover {
+            background-color: #ccc;
+        }
+        
+        .boton-operador {
+            background-color: #66ccff;
+            color: #fff;
+        }
+        
+        .boton-operador:hover {
+            background-color: #4db8ff;
+        }
+        
+        .boton-igual {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+        
+        .boton-igual:hover {
+            background-color: #3e8e41;
+        }
+        
+        #footer {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculadora">
+        <input type="text" id="pantalla" disabled>
+        <div>
+            <button class="boton" onclick="agregarValor('7')">7</button>
+            <button class="boton" onclick="agregarValor('8')">8</button>
+            <button class="boton" onclick="agregarValor('9')">9</button>
+            <button class="boton boton-operador" onclick="agregarValor('/')">/</button>
+        </div>
+        <div>
+            <button class="boton" onclick="agregarValor('4')">4</button>
+            <button class="boton" onclick="agregarValor('5')">5</button>
+            <button class="boton" onclick="agregarValor('6')">6</button>
+            <button class="boton boton-operador" onclick="agregarValor('*')">*</button>
+        </div>
+        <div>
+            <button class="boton" onclick="agregarValor('1')">1</button>
+            <button class="boton" onclick="agregarValor('2')">2</button>
+            <button class="boton" onclick="agregarValor('3')">3</button>
+            <button class="boton boton-operador" onclick="agregarValor('-')">-</button>
+        </div>
+        <div>
+            <button class="boton" onclick="agregarValor('0')">0</button>
+            <button class="boton" onclick="borrar()">C</button>
+            <button class="boton" onclick="borrarUno()">DEL</button>
+            <button class="boton boton-operador" onclick="agregarValor('+')">+</button>
+        </div>
+        <div>
+            <button class="boton boton-igual" onclick="calcular()">=</button>
+            <button class="boton boton-operador" onclick="reiniciar()">AC</button>
+        </div>
+    </div>
+    <div id="footer">
+        By 1nzekto de LISABELLACORP
+    </div>
+
+    <script>
+        let pantalla = document.getElementById('pantalla');
+        let valorActual = '';
+
+        function agregarValor(valor) {
+            valorActual += valor;
+            pantalla.value = valorActual;
+        }
+
+        function calcular() {
+            try {
+                let resultado = eval(valorActual);
+                pantalla.value = resultado;
+                valorActual = resultado.toString();
+            } catch (error) {
+                pantalla.value = 'Error';
+                valorActual = '';
+            }
+        }
+
+        function borrar() {
+            valorActual = '';
+            pantalla.value = '';
+        }
+
+        function borrarUno() {
+            valorActual = valorActual.slice(0, -1);
+            pantalla.value = valorActual;
+        }
+
+        function reiniciar() {
+            valorActual = '';
+            pantalla.value = '';
+        }
+    </script>
+</body>
+</html>
